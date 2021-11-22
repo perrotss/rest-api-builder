@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'json'
+
+if Recipe.count == 0
+    path = File.join(File.dirname(__FILE__), "data.json")
+    records = JSON.parse(File.read(path))
+    records.each do |record|
+    Recipe.create!(record)
+    end
+    puts "recipes are seeded"
+end
